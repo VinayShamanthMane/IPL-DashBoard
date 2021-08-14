@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Aug 13 16:05:45 IST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-017b-3f14-fad5-000002497098 
+on database directory memory:F:\My_Projects\Eclipse-R-SB_FS\ipl-dashboard\9a332534-cc19-45f0-b338-2f2a610b5ba4 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4b85612c 
+Loaded from file:/C:/Users/Shamanth/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=15.0.2+7-27
+user.dir=F:\My_Projects\Eclipse-R-SB_FS\ipl-dashboard
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
