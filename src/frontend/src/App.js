@@ -7,14 +7,17 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/teams/:teamName">
-            <TeamPage />
-          </Route>
           <Route path="/teams/:teamName/matches/:year">
             <MatchPage />
           </Route>
+
+          <Route path="/teams/:teamName">
+            <TeamPage />
+          </Route>
         </Switch>
       </Router>
+
+      <img src="./Biriyani.jpg" alt="itemss" />
     </div>
   );
 }

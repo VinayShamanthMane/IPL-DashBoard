@@ -5,10 +5,14 @@ export const MatchSmallCard = ({ match, teamName }) => {
   if (!match) return null;
   const otherTeam = match.team1 === teamName ? match.team2 : match.team1;
   const otherTeamRoute = `/teams/${otherTeam}`;
+  const isTeamWin = match.matchWinner === teamName;
   return (
-    <div className="matchSmallCard">
+    <div
+      className={isTeamWin ? "matchSmallCard winner" : "matchSmallCard loser"}
+    >
+      <span className="vs">vs</span>
       <h3>
-        vs <Link to={otherTeamRoute}>{otherTeam}</Link>
+        <Link to={otherTeamRoute}>{otherTeam}</Link>
       </h3>
       <p>
         {match.matchWinner} won by {match.resultMargin} {match.result}
