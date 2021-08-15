@@ -4,6 +4,7 @@ import { PieChart } from "react-minimal-pie-chart";
 import { MatchDetailsCard } from "../components/MatchDetailsCard";
 import { MatchSmallCard } from "../components/MatchSmallCard";
 import items from "../data";
+import logo192 from "../logo";
 
 export const TeamPage = () => {
   const [team, setTeam] = useState({ latestMatches: [] });
@@ -61,6 +62,10 @@ export const TeamPage = () => {
       </div>
       <img src={logos[0].img} alt="food" />
       <h3>{logos[0].title}</h3>
+
+      {items.map((item) => {
+        return <img key={item.id} src={item.img} alt={item.title} />;
+      })}
     </div>
   );
 };
