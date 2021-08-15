@@ -16,8 +16,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-
-      <img src="./Biriyani.jpg" alt="itemss" />
     </div>
   );
 }
