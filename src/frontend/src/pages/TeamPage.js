@@ -6,7 +6,6 @@ import { MatchSmallCard } from "../components/MatchSmallCard";
 
 export const TeamPage = () => {
   const [team, setTeam] = useState({ latestMatches: [] });
-  const [logos, setLogos] = useState(items);
 
   const { teamName } = useParams();
 
