@@ -6,12 +6,13 @@ import { MatchSmallCard } from "../components/MatchSmallCard";
 
 export const TeamPage = () => {
   const [team, setTeam] = useState({ latestMatches: [] });
-
   const { teamName } = useParams();
 
   useEffect(() => {
     const fetchTeamData = async () => {
-      const respone = await fetch(`http://localhost:8080/team/${teamName}`);
+      const respone = await fetch(
+        `${process.env.REACT_APP_API_ROOT_URL}/team/${teamName}`
+      );
       const data = await respone.json();
       setTeam(data);
     };
@@ -26,6 +27,10 @@ export const TeamPage = () => {
       <div className="heading">
         <div className="team-name">
           <h1>{team.teamName}</h1>
+          <img
+            src={`${process.env.PUBLIC_URL}/images/${teamName}.jpg`}
+            alt="logo"
+          />
         </div>
         <div className="win-loss">
           <h4>Wins / Losses</h4>
@@ -47,15 +52,34 @@ export const TeamPage = () => {
         teamName={team.teamName}
         match={team.latestMatches[0]}
       />
+
       <div className="smallcards">
-        {team.latestMatches.slice(1).map((match) => (
-          <MatchSmallCard
-            key={match.id}
-            teamName={team.teamName}
-            match={match}
-          />
-        ))}
-        <Link to="#">More...</Link>
+        <div className="smallcards-container">
+          {team.latestMatches.slice(1).map((match) => (
+            <div>
+              <MatchSmallCard
+                key={match.id}
+                teamName={team.teamName}
+                match={match}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="links">
+          <div className="nav-links">
+            <Link
+              to={`/teams/${teamName}/matches/${process.env.REACT_APP_DATA_END_YEAR}`}
+            >
+              <h3>More...</h3>
+            </Link>
+          </div>
+          <div className="nav-links">
+            <Link to="/">
+              <h4> Back home </h4>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

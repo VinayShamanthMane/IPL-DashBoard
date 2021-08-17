@@ -21,8 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-
-
 @Configuration
 @EnableBatchProcessing
 public class BatchConfig {
@@ -39,7 +37,6 @@ public class BatchConfig {
 
     @Bean
     public FlatFileItemReader<MatchInput> reader() {
-    	System.out.println("Reached reader execution");
         return new FlatFileItemReaderBuilder<MatchInput>().name("MatchItemReader")
                 .resource(new ClassPathResource("match-data.csv")).delimited().names(FIELD_NAMES)
                 .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchInput>() {
@@ -51,13 +48,13 @@ public class BatchConfig {
 
     @Bean
     public MatchDataProcessor processor() {
-    	System.out.println("Reached processor execution");
+
         return new MatchDataProcessor();
     }
 
     @Bean
     public JdbcBatchItemWriter<Match> writer(DataSource dataSource) {
-    	System.out.println("Reached writer execution");
+
         return new JdbcBatchItemWriterBuilder<Match>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
                 .sql("INSERT INTO match (id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, umpire1, umpire2) "
@@ -67,23 +64,13 @@ public class BatchConfig {
 
     @Bean
     public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-        return jobBuilderFactory
-            .get("importUserJob")
-            .incrementer(new RunIdIncrementer())
-            .listener(listener)
-            .flow(step1)
-            .end()
-            .build();
+        return jobBuilderFactory.get("importUserJob").incrementer(new RunIdIncrementer()).listener(listener).flow(step1)
+                .end().build();
     }
 
     @Bean
     public Step step1(JdbcBatchItemWriter<Match> writer) {
-        return stepBuilderFactory
-            .get("step1")
-            .<MatchInput, Match>chunk(10)
-            .reader(reader())
-            .processor(processor())
-            .writer(writer)
-            .build();
+        return stepBuilderFactory.get("step1").<MatchInput, Match>chunk(10).reader(reader()).processor(processor())
+                .writer(writer).build();
     }
 }
